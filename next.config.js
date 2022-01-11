@@ -6,8 +6,8 @@
 const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
-  productionBrowserSourceMaps: false,
   // Your existing module.exports
+  productionBrowserSourceMaps: true,
 };
 
 const SentryWebpackPluginOptions = {
