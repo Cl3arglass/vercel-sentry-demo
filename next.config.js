@@ -7,7 +7,21 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
   // Your existing module.exports
-  productionBrowserSourceMaps: true,
+    async rewrites() {
+      const isVercel = !!process.env.VERCEL_ENV;
+      if (isVercel) {
+          return {
+              beforeFiles: [
+                  {
+                      source: "/:path*.map",
+                      destination: "/404",
+                  },
+              ],
+          };
+      }
+
+      return [];
+  }
 };
 
 const SentryWebpackPluginOptions = {
